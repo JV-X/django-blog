@@ -1,7 +1,16 @@
 {% load static %}
 
-<div id="id-data">{{ key1 }} {{key2}}</div>
+<data id="id-data" value="{{ key1 }} {{key2}}"></data>
 
 <canvas id="id-canvas"></canvas>
 
+<!-- set body's margin as 0 for get a full-screen canvas-->
+<style type="text/css">
+body{
+    margin:0;
+    padding:0;
+}
+</style>
+
+<script type="text/javascript" src="{% static "js/lib.js" %}"></script>
 <script type="text/javascript" src="{% static "js/index.js" %}"></script>
