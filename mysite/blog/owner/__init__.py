@@ -1,12 +1,17 @@
 import json
 
 
-def load_owner_info():
-    with open("info.json") as f:
-        info = json.loads(f, encoding="utf-8")
-        print(info)
+def owner_info():
+    info = {
+        "name": "向三",
+        "welcome": "你好",
+        "email": "xjv1195275315@gmail.com",
+        "phone": 18408225544
+    }
 
-    return info
+    info_json = json.dump(info)
+
+    return info_json
 
 
-load_owner_info()
+owner_info()
