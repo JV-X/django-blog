@@ -9,7 +9,7 @@ def owner_info():
         "phone": 18408225544
     }
 
-    info_json = json.dump(info)
+    info_json = json.dumps(info)
 
     return info_json
 
