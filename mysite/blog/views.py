@@ -7,11 +7,11 @@ from .owner import owner_info
 
 
 def index(request):
-    owenr = owner_info()
+    owner = owner_info()
     ctx = {
         "key1": "value1",
         "key2": "value2",
-        "owenr": owenr,
+        "owner": owner,
     }
 
     return TemplateResponse(request, "index.html", ctx)

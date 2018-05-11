@@ -6,10 +6,10 @@ def owner_info():
         "name": "向三",
         "welcome": "你好",
         "email": "xjv1195275315@gmail.com",
-        "phone": 18408225544
+        "phone": 1111111111111111
     }
 
-    info_json = json.dumps(info)
+    info_json = json.dumps(info, ensure_ascii=False)
 
     return info_json
 

@@ -1,7 +1,13 @@
+
 function _main() {
-    var canvas = document.getElementById('id-canvas')
-    var ctx = canvas.getContext('2d')
-    ctx.fillRect(0, 0, 100, 100)
+    xv = XvUI.instance();
+    var ctx = xv.canvas.getContext("2d")
+    ctx.fillStyle = 'green'
+    ctx.fillRect(0,0,xv.width,xv.height)
+    ctx.font = '48px serif'
+    ctx.fillStyle = 'black'
+    ctx.fillText('Hello world', 50, 100)
+    log("ctx is "+ctx+",w is :"+xv.width+",h:"+xv.height)
 }
 
 _main()
