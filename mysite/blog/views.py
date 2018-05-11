@@ -14,4 +14,4 @@ def index(request):
         "owner": owner,
     }
 
-    return TemplateResponse(request, "index.html", ctx)
+    return TemplateResponse(request, "welcome.html", ctx)
