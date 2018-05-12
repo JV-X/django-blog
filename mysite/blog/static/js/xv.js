@@ -28,10 +28,6 @@ class XvFrameWork {
         })
     }
 
-    setUI(ui) {
-        this.ui = ui
-    }
-
     uiRunTask() {
         xv = XvFrameWork.instance()
         var ui = xv.ui
@@ -50,20 +46,30 @@ class XvFrameWork {
         ui.draw(xv.ctx)
     }
 
-    start() {
+    startUI(ui) {
+        this.ui = ui
         setInterval(this.uiRunTask, 1000 / this.fps)
     }
 
 }
 
 class XvText {
-    constructor(text) {
+
+     static new(text, x, y, size) {
+        return new this(text, x, y, size, "serif", "black")
+     }
+
+     static new(text, x, y, size, color) {
+        return new this(text, x, y, size, "serif", color)
+     }
+
+    constructor(text, x, y, size, font, color) {
         this.text = text
-        this.x = 0
-        this.y = 0
-        this.size = 30
-        this.font = "serif"
-        this.color = "black"
+        this.x = x
+        this.y = y
+        this.size = size
+        this.font = font
+        this.color = color
     }
 
     update(x,y,size,color) {
@@ -77,6 +83,39 @@ class XvText {
         ctx.font = this.size+"px "+this.font
         ctx.fillStyle = this.color
         ctx.fillText(this.text, this.x, this.y)
+    }
+
+}
+
+class XvImage {
+
+    static new(url, x, y, width, height, callback) {
+        var i = new Image()
+        var img = new this(i, x, y, width, height)
+        i.src = url
+        i.onload = callback(img)
+
+        return img
+    }
+
+    constructor(image, x, y, width, height) {
+        this.image = image
+        this.x = x
+        this.y = y
+        this.w = width
+        this.h = height
+    }
+
+    update(x, y, width, height) {
+        this.x = x
+        this.y = y
+        this.w = width
+        this.h = height
+    }
+
+    draw(ctx) {
+        log("this.image:"+this.image+",this.x:"+this.x+",this.y:"+this.y+",this.width:"+this.w+",this.height:"+this.h)
+        ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
     }
 
 }

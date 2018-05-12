@@ -1,39 +1,80 @@
 class WelcomeUI {
-    constructor() {
-        this.worlds = {}
-        var helloWorld = new XvText()
-        helloWorld.text = 'Hello world'
-        helloWorld.font = 'Microsoft YaHei'
-        helloWorld.color = 'red'
-        helloWorld.x = 50
-        helloWorld.y = 100
-        this.worlds['Hello world'] = helloWorld
+
+    constructor(xv) {
+        var img = {
+            "0":"static/image/0.png",
+            "1":"static/image/1.png",
+            "J":"static/image/J.png",
+            "i":"static/image/i.png",
+            "a":"static/image/a.png",
+            "n":"static/image/n.png",
+            "w":"static/image/w.png",
+            "e":"static/image/e.png",
+            "i":"static/image/i.png",
+            "-":"static/image/-.png",
+            "x":"static/image/x.png",
+            "c":"static/image/c.png",
+            "dot":"static/image/dot.png",
+        }
+
+        this.images = img
+        this.loadedImages = {}
+
+        this.xv = xv
+        var self = this
+
+        var imageKeys = Object.keys(this.images)
+        for (var i = 0; i< imageKeys.length; i++) {
+            let key = imageKeys[i]
+            let url = this.images[key]
+
+            var onload = function(imgObject) {
+                self.loadedImages[key] = imgObject
+
+                var imgCount = Object.keys(self.images).length
+                var loadedCount = Object.keys(self.loadedImages).length
+                if (imgCount == loadedCount) {
+                    xv.startUI(self)
+                }
+            }
+
+            XvImage.new(url, i*60, i*60, 120, 44, onload)
+        }
+    }
+
+    static new(xv) {
+        return new WelcomeUI(xv)
     }
 
     update() {
-        var h = this.worlds['Hello world']
-        h.x = h.x + 3
+        var imageKeys = Object.keys(this.loadedImages)
+
+        for (var i = 0; i< imageKeys.length; i++) {
+            let key = imageKeys[i]
+            let img = this.loadedImages[key]
+
+            img.update(img.x + 1, img.y + 1,img.w + 1, img.h + 1)
+        }
     }
 
     draw(ctx) {
-        this.worlds['Hello world'].draw(ctx)
-    }
+        var imageKeys = Object.keys(this.loadedImages)
 
-    release() {
-        worlds.clear()
+        for (var i = 0; i< imageKeys.length; i++) {
+            let key = imageKeys[i]
+            let img = this.loadedImages[key]
+
+            img.draw(ctx)
+        }
     }
 
 }
 
 
 function _main() {
-    welcome = new WelcomeUI()
-
     xv = XvFrameWork.instance()
-    xv.setUI(welcome)
-    xv.start()
+    welcome = WelcomeUI.new(xv)
 
-    log("ctx is "+ctx+",w is :"+xv.width+",h:"+xv.height)
 }
 
 _main()
