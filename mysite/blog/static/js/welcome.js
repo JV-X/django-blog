@@ -1,7 +1,8 @@
 class WelcomeUI {
 
     constructor(xv) {
-        var img = {
+        this.loadedImages = {}
+        this.images = {
             "0":"static/image/0.png",
             "1":"static/image/1.png",
             "J":"static/image/J.png",
@@ -17,12 +18,8 @@ class WelcomeUI {
             "dot":"static/image/dot.png",
         }
 
-        this.images = img
-        this.loadedImages = {}
-
         this.xv = xv
         var self = this
-
         var imageKeys = Object.keys(this.images)
         for (var i = 0; i< imageKeys.length; i++) {
             let key = imageKeys[i]
@@ -74,7 +71,6 @@ class WelcomeUI {
 function _main() {
     xv = XvFrameWork.instance()
     welcome = WelcomeUI.new(xv)
-
 }
 
 _main()
