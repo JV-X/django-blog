@@ -1,46 +1,59 @@
 class WelcomeUI {
 
-    constructor(xv) {
-        this.loadedImages = {}
-        this.images = {
-            "0":"static/image/0.png",
-            "1":"static/image/1.png",
-            "J":"static/image/J.png",
-            "i":"static/image/i.png",
-            "a":"static/image/a.png",
-            "n":"static/image/n.png",
-            "w":"static/image/w.png",
-            "e":"static/image/e.png",
-            "i":"static/image/i.png",
-            "-":"static/image/-.png",
-            "x":"static/image/x.png",
-            "c":"static/image/c.png",
-            "dot":"static/image/dot.png",
-        }
+    static create() {
+        return new WelcomeUI()
+    }
 
-        this.xv = xv
-        var self = this
-        var imageKeys = Object.keys(this.images)
+    constructor() {
+        this.imagesConfig = this.getImagesConfig()
+        this.loadedImages = {}
+
+        this.loadImages(this.imagesConfig, this.loadedImages)
+
+        this.step = 0
+    }
+
+    loadImages(imagesConfig, loadedImages) {
+        var context = this
+
+        var imageKeys = Object.keys(imagesConfig)
         for (var i = 0; i< imageKeys.length; i++) {
             let key = imageKeys[i]
-            let url = this.images[key]
+            let url = imagesConfig[key]['url']
 
             var onload = function(imgObject) {
-                self.loadedImages[key] = imgObject
+                loadedImages[key] = imgObject
 
-                var imgCount = Object.keys(self.images).length
-                var loadedCount = Object.keys(self.loadedImages).length
+                var imgCount = Object.keys(imagesConfig).length
+                var loadedCount = Object.keys(loadedImages).length
                 if (imgCount == loadedCount) {
-                    xv.startUI(self)
+                    XvFrameWork.instance().startUI(context)
                 }
             }
 
-            XvImage.new(url, i*60, i*60, 120, 44, onload)
+            var p = imagesConfig[key]["position"]
+            XvImage.new(url, p["x"], p["y"], p["w"], p["h"], onload)
         }
     }
 
-    static new(xv) {
-        return new WelcomeUI(xv)
+    getImagesConfig() {
+        var i = {
+//            "0":{"url": "static/image/0.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update":},
+//            "1":{"url": "static/image/1.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update":},
+            "J":{"url": "static/image/J.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.updateImageJ},
+            "i":{"url": "static/image/i.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "a":{"url": "static/image/a.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "n":{"url": "static/image/n.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "w":{"url": "static/image/w.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "e":{"url": "static/image/e.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "i":{"url": "static/image/i.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "-":{"url": "static/image/-.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "x":{"url": "static/image/x.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "c":{"url": "static/image/c.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "-":{"url": "static/image/dot.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+        }
+
+        return i
     }
 
     update() {
@@ -50,27 +63,105 @@ class WelcomeUI {
             let key = imageKeys[i]
             let img = this.loadedImages[key]
 
-            img.update(img.x + 1, img.y + 1,img.w + 1, img.h + 1)
+            var update = this.imagesConfig[key]["update"]
+            update(img)
         }
     }
 
     draw(ctx) {
+        this.step = this.step + 1
+
         var imageKeys = Object.keys(this.loadedImages)
 
         for (var i = 0; i< imageKeys.length; i++) {
             let key = imageKeys[i]
             let img = this.loadedImages[key]
 
-            img.draw(ctx)
+            img.draw(ctx, this.step)
         }
+    }
+
+
+    static destroy() {
+        log("TODO")
     }
 
 }
 
+class WelcomeUIAnimation {
+
+//     static updateImage0(img, step) {
+//        if (step < 5000) {
+//            return
+//        }
+//
+//     }
+//
+//     static updateImage1(img) {
+//
+//     }
+     static defaultUpdate() {
+
+     }
+
+     static updateImageJ(img, step) {
+        var widthGravity = XvFrameWork.instance().widthGravity
+        var heightGravity = XvFrameWork.instance().heightGravity
+
+        var offsetX = 2
+        var offsetY = 2
+        var offsetW = 1
+        var offsetH = 1
+
+        img.update(
+            img.x + offsetX * widthGravity,
+            img.y + offsetY * heightGravity,
+            img.w + offsetW * widthGravity,
+            img.h + offsetH * heightGravity
+            )
+     }
+
+     static updateImagei(img) {
+
+     }
+
+     static updateImagea(img) {
+
+     }
+
+     static updateImagen(img) {
+
+     }
+
+     static updateImagew(img) {
+
+     }
+
+     static updateImagee(img) {
+
+     }
+
+     static updateImagei(img) {
+
+     }
+
+     static updateImage_(img) {
+
+     }
+
+     static updateImagex(img) {
+
+     }
+
+     static updateImagec(img) {
+
+     }
+}
+
+
 
 function _main() {
-    xv = XvFrameWork.instance()
-    welcome = WelcomeUI.new(xv)
+    welcome = WelcomeUI.create()
 }
 
 _main()

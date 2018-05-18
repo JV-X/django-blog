@@ -3,8 +3,13 @@ class XvFrameWork {
     constructor(fps) {
         this.canvas = element('#id-canvas')
         this.ctx = this.canvas.getContext("2d")
+
         this.height = this.canvas.height = document.body.clientHeight
         this.width = this.canvas.width = document.body.clientWidth
+        this.designWidth = 1920
+        this.designHeight = 1080
+        this.widthGravity = this.width / this.designWidth
+        this.heightGravity = this.height / this.designHeight
 
         this.fps = fps
 
@@ -29,7 +34,7 @@ class XvFrameWork {
     }
 
     uiRunTask() {
-        xv = XvFrameWork.instance()
+        var xv = XvFrameWork.instance()
         var ui = xv.ui
         var eventsBuffer = xv.eventsBuffer
         var registeredEvents = xv.registeredEvents
