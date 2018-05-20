@@ -23,7 +23,6 @@ class WelcomeUI {
 
             var onload = function(imgObject) {
                 loadedImages[key] = imgObject
-
                 var imgCount = Object.keys(imagesConfig).length
                 var loadedCount = Object.keys(loadedImages).length
                 if (imgCount == loadedCount) {
@@ -43,92 +42,92 @@ class WelcomeUI {
             "J":{
                 "url": "static/image/J.png",
                 "position": {
-                    "x": 400,
+                    "x": 300,
                     "y": 0,
                     "w": 50,
                     "h": 50,
                 },
                     "update": WelcomeUIAnimation.updateImageJ
             },
-            "i":{
+            "i1":{
                 "url": "static/image/i.png",
                 "position": {
-                    "x": 0,
+                    "x": 200,
                     "y": 0,
-                    "w": 10,
-                    "h": 10,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagei1
             },
             "a":{
                 "url": "static/image/a.png",
                 "position": {
-                    "x": 0,
+                    "x": 100,
                     "y": 0,
-                    "w": 10,
-                    "h": 10,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagea
             },
             "n":{
                 "url": "static/image/n.png",
                 "position": {
-                    "x": 0,
+                    "x": 50,
                     "y": 0,
-                    "w": 10,
-                    "h": 1
+                    "w": 30,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagen
             },
             "w":{
                 "url": "static/image/w.png",
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 10,
-                    "h": 1
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagew
             },
             "e":{
                 "url": "static/image/e.png",
                 "position": {
                     "x": 0,
-                    "y": 0,
-                    "w": 10,
-                    "h": 10
+                    "y": 50,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagee
             },
-            "i":{
+            "i2":{
                 "url": "static/image/i.png",
                 "position": {
                     "x": 0,
-                    "y": 0,
-                    "w": 10,
-                    "h": 10
+                    "y": 100,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagei2
             },
             "-":{
                 "url": "static/image/-.png",
                 "position": {
                     "x": 0,
-                    "y": 0,
-                    "w": 10,
-                    "h": 10,
+                    "y": 200,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImage_
             },
             "x":{
                 "url": "static/image/x.png",
                 "position": {
                     "x": 0,
-                    "y": 0,
-                    "w": 10,
-                    "h": 10,
+                    "y": 200,
+                    "w": 38,
+                    "h": 38,
                 },
-                    "update": WelcomeUIAnimation.defaultUpdate
+                    "update": WelcomeUIAnimation.updateImagex
             },
             "c":{
                 "url": "static/image/c.png",
@@ -140,7 +139,7 @@ class WelcomeUI {
                 },
                     "update": WelcomeUIAnimation.defaultUpdate
             },
-            "-":{
+            "dot":{
                 "url": "static/image/dot.png",
                 "position": {
                     "x": 0,
@@ -156,27 +155,25 @@ class WelcomeUI {
     }
 
     update() {
-        var imageKeys = Object.keys(this.loadedImages)
+        this.step = this.step + 1
 
+        var imageKeys = Object.keys(this.loadedImages)
         for (var i = 0; i< imageKeys.length; i++) {
             let key = imageKeys[i]
             let img = this.loadedImages[key]
 
-            var update = this.imagesConfig[key]["update"]
-            update(img)
+            let updateMethod = this.imagesConfig[key]["update"]
+            updateMethod(img, this.step)
         }
     }
 
     draw(ctx) {
-        this.step = this.step + 1
-
         var imageKeys = Object.keys(this.loadedImages)
-
         for (var i = 0; i< imageKeys.length; i++) {
             let key = imageKeys[i]
             let img = this.loadedImages[key]
 
-            img.draw(ctx, this.step)
+            img.draw(ctx)
         }
     }
 
@@ -186,28 +183,94 @@ class WelcomeUI {
 
 }
 
+var args = {
+    "textY": 117,
+    "textMargin": 8,
+    "textBaseX": 0,
+    "displayInterval": 5,
+}
+
 class WelcomeUIAnimation {
 
-//     static updateImage0(img, step) {
-//        if (step < 5000) {
-//            return
-//        }
-//
-//     }
-//
-//     static updateImage1(img) {
-//
-//     }
+    static defaultUpdate() {
+    
+    }
 
-     static defaultUpdate() {
+    static updateImageJ(img, step) {
+        var offsetX = -30, offsetY = 10, offsetW = 0, offsetH = 0
+        
+        if (img.y + offsetY > 108) {
+            img.y = 108
+            return
+        }
+        
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
+    }
 
-     }
+    static updateImagei1(img, step) {
+        if (step < args["displayInterval"] * 1) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 38, img.h = 38
+        }
+        
+        var offsetX = -20, offsetY = 10, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"] - 2) {
+            img.y = args["textY"] - 2
+            return
+        }
 
-     static updateImageJ(img, step) {
-        var offsetX = 0
-        var offsetY = 10
-        var offsetW = 0
-        var offsetH = 0
+        if (img.x + offsetX < 25) {
+            img.x =  25 - offsetX
+        }
+        
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
+    }
+
+    static updateImagea(img, step) {
+        if (step < args["displayInterval"] * 2) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 38, img.h = 38
+        }
+        
+        var offsetX = -5, offsetY = 10, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"]) {
+            img.y = args["textY"]
+            return
+        }
+
+        if (img.x + offsetX < 30) {
+            img.x = 30 - offsetX
+        }
+        
+        img.update(
+            img.x + offsetX,
+            img.y + offsetY,
+            img.w + offsetW,
+            img.h + offsetH
+            )
+    }
+
+    static updateImagen(img, step) {
+        if (step < args["displayInterval"] * 3) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 32, img.h = 38
+        }
+
+        var offsetX = 3, offsetY = 10, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"]) {
+            img.y = args["textY"]
+            return
+        }
+
+        if (img.x + offsetX > 80) {
+            img.x = 80 - offsetX
+        }
 
         img.update(
             img.x + offsetX,
@@ -215,45 +278,131 @@ class WelcomeUIAnimation {
             img.w + offsetW,
             img.h + offsetH
             )
-     }
+    }
 
-     static updateImagei(img) {
+    static updateImagew(img, step) {
+        if (step < args["displayInterval"] * 4) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 40, img.h = 40
+        }
 
-     }
+        var offsetX = 10, offsetY = 10, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"] - 3) {
+            img.y = args["textY"] - 3
+            return
+        }
 
-     static updateImagea(img) {
+        if (img.x + offsetX > 120) {
+            img.x = 120 - offsetX
+        }
 
-     }
+        img.update(
+            img.x + offsetX,
+            img.y + offsetY,
+            img.w + offsetW,
+            img.h + offsetH
+            )
+    }
 
-     static updateImagen(img) {
+    static updateImagee(img, step) {
+        if (step < args["displayInterval"] * 5) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 32, img.h = 32
+        }
 
-     }
+        var offsetX = 25, offsetY = 10, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"] + 5) {
+            img.y = args["textY"] + 5
+            return
+        }
 
-     static updateImagew(img) {
+        if (img.x + offsetX > 150) {
+            img.x = 150 - offsetX
+        }
 
-     }
+        img.update(
+            img.x + offsetX,
+            img.y + offsetY,
+            img.w + offsetW,
+            img.h + offsetH
+            )
+    }
 
-     static updateImagee(img) {
+    static updateImagei2(img, step) {
+        if (step < args["displayInterval"] * 6) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 36, img.h = 36
+        }
 
-     }
+        var offsetX = 25, offsetY = 2, offsetW = 0, offsetH = 0
+        if (img.y + offsetY > args["textY"]) {
+            img.y = args["textY"]
+            return
+        }
 
-     static updateImagei(img) {
+        if (img.x + offsetX > 170) {
+            img.x = 170 - offsetX
+        }
 
-     }
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
+    }
 
-     static updateImage_(img) {
+    static updateImage_(img, step) {
+        if (step < args["displayInterval"] * 7) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 36, img.h = 36
+        }
 
-     }
+        var offsetX = 25, offsetY = 1, offsetW = 0, offsetH = 0
 
-     static updateImagex(img) {
+        if (img.x + offsetX > 190) {
+            img.x = 190
+            return
+        }
 
-     }
+        if (img.y + offsetY > args["textY"]) {
+            log("invokle")
+            img.y = args["textY"]
+        }
 
-     static updateImagec(img) {
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
+    }
 
-     }
+    static updateImagex(img, step) {
+        if (step < args["displayInterval"] * 8) {
+            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            return
+        } else {
+            img.w = 38, img.h = 38
+        }
+
+        var offsetX = 25, offsetY = -10, offsetW = 0, offsetH = 0
+
+        if (img.x + offsetX > 215) {
+            img.x = 215
+            return
+        }
+
+        if (img.y + offsetY < args["textY"]) {
+            log("invokle")
+            img.y = args["textY"]
+        }
+
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
+    }
+
+    static updateImagec(img, step) {
+
+    }
 }
-
 
 
 function _main() {

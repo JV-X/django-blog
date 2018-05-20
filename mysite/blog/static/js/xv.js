@@ -20,7 +20,7 @@ class XvFrameWork {
     }
 
     static instance() {
-        this.i = this.i || new this(60)
+        this.i = this.i || new this(50)
         return this.i
     }
 
