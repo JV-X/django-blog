@@ -185,15 +185,12 @@ class WelcomeUI {
 
 var args = {
     "textY": 117,
-    "textMargin": 8,
-    "textBaseX": 0,
     "displayInterval": 5,
 }
 
 class WelcomeUIAnimation {
 
     static defaultUpdate() {
-    
     }
 
     static updateImageJ(img, step) {
@@ -209,7 +206,7 @@ class WelcomeUIAnimation {
 
     static updateImagei1(img, step) {
         if (step < args["displayInterval"] * 1) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 38, img.h = 38
@@ -230,7 +227,7 @@ class WelcomeUIAnimation {
 
     static updateImagea(img, step) {
         if (step < args["displayInterval"] * 2) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 38, img.h = 38
@@ -246,17 +243,12 @@ class WelcomeUIAnimation {
             img.x = 30 - offsetX
         }
         
-        img.update(
-            img.x + offsetX,
-            img.y + offsetY,
-            img.w + offsetW,
-            img.h + offsetH
-            )
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
     }
 
     static updateImagen(img, step) {
         if (step < args["displayInterval"] * 3) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 32, img.h = 38
@@ -272,17 +264,12 @@ class WelcomeUIAnimation {
             img.x = 80 - offsetX
         }
 
-        img.update(
-            img.x + offsetX,
-            img.y + offsetY,
-            img.w + offsetW,
-            img.h + offsetH
-            )
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
     }
 
     static updateImagew(img, step) {
         if (step < args["displayInterval"] * 4) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 40, img.h = 40
@@ -298,17 +285,12 @@ class WelcomeUIAnimation {
             img.x = 120 - offsetX
         }
 
-        img.update(
-            img.x + offsetX,
-            img.y + offsetY,
-            img.w + offsetW,
-            img.h + offsetH
-            )
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
     }
 
     static updateImagee(img, step) {
         if (step < args["displayInterval"] * 5) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 32, img.h = 32
@@ -324,17 +306,12 @@ class WelcomeUIAnimation {
             img.x = 150 - offsetX
         }
 
-        img.update(
-            img.x + offsetX,
-            img.y + offsetY,
-            img.w + offsetW,
-            img.h + offsetH
-            )
+        img.update(img.x + offsetX, img.y + offsetY, img.w + offsetW, img.h + offsetH)
     }
 
     static updateImagei2(img, step) {
         if (step < args["displayInterval"] * 6) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 36, img.h = 36
@@ -355,7 +332,7 @@ class WelcomeUIAnimation {
 
     static updateImage_(img, step) {
         if (step < args["displayInterval"] * 7) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 36, img.h = 36
@@ -378,7 +355,7 @@ class WelcomeUIAnimation {
 
     static updateImagex(img, step) {
         if (step < args["displayInterval"] * 8) {
-            img.h = 0, img.w = 0 // todo 这里先这样控制显示隐藏，待处理
+            img.h = 0, img.w = 0 
             return
         } else {
             img.w = 38, img.h = 38
@@ -400,10 +377,8 @@ class WelcomeUIAnimation {
     }
 
     static updateImagec(img, step) {
-
     }
 }
-
 
 function _main() {
     welcome = WelcomeUI.create()
