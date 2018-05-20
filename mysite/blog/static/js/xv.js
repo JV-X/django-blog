@@ -20,7 +20,7 @@ class XvFrameWork {
     }
 
     static instance() {
-        this.i = this.i || new this(30)
+        this.i = this.i || new this(60)
         return this.i
     }
 
@@ -58,6 +58,17 @@ class XvFrameWork {
 
 }
 
+function adaptWidth(x) {
+    var widthGravity = XvFrameWork.instance().widthGravity
+    return x * widthGravity
+}
+
+function adaptHeight(y) {
+    var heightGravity = XvFrameWork.instance().heightGravity
+    return y * heightGravity
+}
+
+
 class XvText {
 
      static new(text, x, y, size) {
@@ -85,9 +96,9 @@ class XvText {
     }
 
     draw(ctx) {
-        ctx.font = this.size+"px "+this.font
+        ctx.font = adaptWidth(this.size)+"px "+this.font
         ctx.fillStyle = this.color
-        ctx.fillText(this.text, this.x, this.y)
+        ctx.fillText(this.text, adaptWidth(this.x), adaptHeight(this.y))
     }
 
 }
@@ -119,8 +130,13 @@ class XvImage {
     }
 
     draw(ctx) {
-        log("this.image:"+this.image+",this.x:"+this.x+",this.y:"+this.y+",this.width:"+this.w+",this.height:"+this.h)
-        ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
+        ctx.drawImage(
+            this.image,
+            adaptWidth(this.x),
+            adaptHeight(this.y),
+            adaptWidth(this.w),
+            adaptHeight(this.h)
+        );
     }
 
 }

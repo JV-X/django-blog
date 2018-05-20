@@ -40,17 +40,116 @@ class WelcomeUI {
         var i = {
 //            "0":{"url": "static/image/0.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update":},
 //            "1":{"url": "static/image/1.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update":},
-            "J":{"url": "static/image/J.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.updateImageJ},
-            "i":{"url": "static/image/i.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "a":{"url": "static/image/a.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "n":{"url": "static/image/n.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "w":{"url": "static/image/w.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "e":{"url": "static/image/e.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "i":{"url": "static/image/i.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "-":{"url": "static/image/-.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "x":{"url": "static/image/x.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "c":{"url": "static/image/c.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
-            "-":{"url": "static/image/dot.png","position": {"x": 0,"y": 0,"w": 10,"h": 10},"update": WelcomeUIAnimation.defaultUpdate},
+            "J":{
+                "url": "static/image/J.png",
+                "position": {
+                    "x": 400,
+                    "y": 0,
+                    "w": 50,
+                    "h": 50,
+                },
+                    "update": WelcomeUIAnimation.updateImageJ
+            },
+            "i":{
+                "url": "static/image/i.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "a":{
+                "url": "static/image/a.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "n":{
+                "url": "static/image/n.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 1
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "w":{
+                "url": "static/image/w.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 1
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "e":{
+                "url": "static/image/e.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "i":{
+                "url": "static/image/i.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "-":{
+                "url": "static/image/-.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "x":{
+                "url": "static/image/x.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "c":{
+                "url": "static/image/c.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                    "update": WelcomeUIAnimation.defaultUpdate
+            },
+            "-":{
+                "url": "static/image/dot.png",
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 10,
+                    "h": 10,
+                },
+                "update": WelcomeUIAnimation.defaultUpdate
+            },
         }
 
         return i
@@ -81,7 +180,6 @@ class WelcomeUI {
         }
     }
 
-
     static destroy() {
         log("TODO")
     }
@@ -100,24 +198,22 @@ class WelcomeUIAnimation {
 //     static updateImage1(img) {
 //
 //     }
+
      static defaultUpdate() {
 
      }
 
      static updateImageJ(img, step) {
-        var widthGravity = XvFrameWork.instance().widthGravity
-        var heightGravity = XvFrameWork.instance().heightGravity
-
-        var offsetX = 2
-        var offsetY = 2
-        var offsetW = 1
-        var offsetH = 1
+        var offsetX = 0
+        var offsetY = 10
+        var offsetW = 0
+        var offsetH = 0
 
         img.update(
-            img.x + offsetX * widthGravity,
-            img.y + offsetY * heightGravity,
-            img.w + offsetW * widthGravity,
-            img.h + offsetH * heightGravity
+            img.x + offsetX,
+            img.y + offsetY,
+            img.w + offsetW,
+            img.h + offsetH
             )
      }
 
