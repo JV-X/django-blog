@@ -10,8 +10,16 @@ class WelcomeUI {
 
         this.loadImages(this.imagesConfig, this.loadedImages)
 
+        this.toBlogListText = new ShowBlogListButton()
+
+        this.bindEvent()
         this.step = 0
     }
+
+    bindEvent() {
+        XvFrameWork.instance().registerEvent('click', this.toBlogListText)
+    }
+
 
     loadImages(imagesConfig, loadedImages) {
         var context = this
@@ -175,12 +183,41 @@ class WelcomeUI {
 
             img.draw(ctx)
         }
+        this.toBlogListText.draw(ctx)
     }
 
     static destroy() {
         log("TODO")
     }
 
+}
+
+class ShowBlogListButton{
+    constructor() {
+        this.x = 950
+        this.y = 530
+        this.size = 50
+        this.text = "博客列表"
+        this.textView = XvText.new(this.text, this.x, this.y, this.size)
+    }
+
+    onEvent(event) {
+        var x = toDesignX(event.clientX)
+        var y = toDesignY(event.clientY)
+        if ((this.x < x && x < this.x + this.size * this.text.length)
+            && (this.y - this.size < y && y < this.y)) {
+            window.location.href = "/list"
+            return true
+        }
+    }
+
+    update() {
+
+    }
+
+    draw(ctx, step) {
+        this.textView.draw(ctx)
+    }
 }
 
 var args = {

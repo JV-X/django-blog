@@ -4,12 +4,8 @@ class XvFrameWork {
         this.canvas = element('#id-canvas')
         this.ctx = this.canvas.getContext("2d")
 
-        this.height = this.canvas.height = document.body.clientHeight
-        this.width = this.canvas.width = document.body.clientWidth
-        this.designWidth = 1920
-        this.designHeight = 1080
-        this.widthGravity = this.width / this.designWidth
-        this.heightGravity = this.height / this.designHeight
+        this.canvas.height = XvAdaptScreen.instance().clientHeight
+        this.canvas.width = XvAdaptScreen.instance().clientWidth
 
         this.fps = fps
 
@@ -24,12 +20,11 @@ class XvFrameWork {
         return this.i
     }
 
-    registerEvent(key, callback) {
-        this.registeredEvents[key] = callback
+    registerEvent(action, target) {
+        this.registeredEvents[action] = target
 
-        xv = this.i
-        window.addEventListener(key, function(event) {
-            xv.eventsBuffer[key] = event
+        window.addEventListener(action, function(event) {
+            XvFrameWork.instance().eventsBuffer[action] = event
         })
     }
 
@@ -39,12 +34,12 @@ class XvFrameWork {
         var eventsBuffer = xv.eventsBuffer
         var registeredEvents = xv.registeredEvents
 
-        xv.ctx.clearRect(0, 0, xv.width, xv.height)
-
-        var keys = Object.keys(eventsBuffer)
-        for (var i = 0; i < keys.length; i++) {
-            event = eventsBuffer[key]
-            registeredEvents[key](event)
+        xv.ctx.clearRect(0, 0, xv.canvas.width, xv.canvas.height)
+        var actions = Object.keys(eventsBuffer)
+        for (var i = 0; i < actions.length; i++) {
+            var action = actions[i]
+            registeredEvents[action].onEvent(eventsBuffer[action])
+            delete eventsBuffer[action]
         }
 
         ui.update()
@@ -58,16 +53,75 @@ class XvFrameWork {
 
 }
 
-function adaptWidth(x) {
-    var widthGravity = XvFrameWork.instance().widthGravity
-    return x * widthGravity
+class XvAdaptScreen {
+
+    constructor() {
+        this.windowWidth = window.screen.width
+        this.windowHeight = window.screen.height
+
+        this.clientWidth = document.body.clientWidth
+        this.clientHeight = document.body.clientHeight
+
+        this.designWidth = 1920
+        this.designHeight = 1080
+    }
+
+    static instance() {
+        this.i = this.i || new this()
+        return this.i
+    }
+
+    toActualX(x) {
+        x = x / this.designWidth * document.body.clientWidth
+        return x
+    }
+
+    toActualY(y) {
+        y = y / this.designHeight * document.body.clientHeight
+        return y
+    }
+
+    toDesignX(x) {
+        log("toDesignX 0 "+x)
+        x = x / document.body.clientWidth * this.designWidth
+        log("toDesignX 1 "+x)
+        return x
+    }
+
+    toDesignY(y) {
+        log("toDesignY 0 "+y)
+        y = y / document.body.clientHeight * this.designHeight
+        log("toDesignY 1 "+y)
+        return y
+    }
 }
 
-function adaptHeight(y) {
-    var heightGravity = XvFrameWork.instance().heightGravity
-    return y * heightGravity
+function toActualX(x) {
+    x = XvAdaptScreen.instance().toActualX(x)
+    return x
 }
 
+function toActualY(y) {
+    y = XvAdaptScreen.instance().toActualY(y)
+    return y
+}
+
+function toDesignX(x) {
+//    log(document.body.scrollTop)
+//    log(document.body.scrollTop)
+//    log(document.body.scrollTop)
+//    log(document.body.scrollLeft)
+//    log(window.screenTop)
+//    log(window.screenLeft)
+
+    x = XvAdaptScreen.instance().toDesignX(x)
+    return x
+}
+
+function toDesignY(y) {
+    y = XvAdaptScreen.instance().toDesignY(y)
+    return y
+}
 
 class XvText {
 
@@ -96,9 +150,9 @@ class XvText {
     }
 
     draw(ctx) {
-        ctx.font = adaptWidth(this.size)+"px "+this.font
+        ctx.font = toActualX(this.size)+"px "+this.font
         ctx.fillStyle = this.color
-        ctx.fillText(this.text, adaptWidth(this.x), adaptHeight(this.y))
+        ctx.fillText(this.text, toActualX(this.x), toActualY(this.y))
     }
 
 }
@@ -132,10 +186,10 @@ class XvImage {
     draw(ctx) {
         ctx.drawImage(
             this.image,
-            adaptWidth(this.x),
-            adaptHeight(this.y),
-            adaptWidth(this.w),
-            adaptHeight(this.h)
+            toActualX(this.x),
+            toActualY(this.y),
+            toActualX(this.w),
+            toActualY(this.h)
         );
     }
 
