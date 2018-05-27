@@ -1,6 +1,6 @@
 from django.db import models
 
-from mysite.blog.models.base import Base
+from .base import Base
 
 
 class Location(Base):

@@ -1,7 +1,7 @@
 from django.db import models
 
-from mysite.blog.models.base import Base
-from mysite.blog.models.status import Character
+from .base import Base
+from .status import Character
 
 
 class User(Base):

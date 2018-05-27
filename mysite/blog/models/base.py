@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Base(models.Model):
+    objects = models.Manager()
 
     id = models.IntegerField(primary_key=True)
     created_time = models.DateTimeField(auto_now_add=True)

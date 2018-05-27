@@ -1,7 +1,7 @@
 from django.db import models
 
-from mysite.blog.models.base import Base
-from mysite.blog.models.status import Authority
+from .base import Base
+from .status import Authority
 
 
 class Comment(Base):

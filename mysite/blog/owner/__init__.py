@@ -10,7 +10,6 @@ def owner_info():
     }
 
     info_json = json.dumps(info, ensure_ascii=False)
-
     return info_json
 
 

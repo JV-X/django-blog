@@ -186,10 +186,6 @@ class WelcomeUI {
         this.toBlogListText.draw(ctx)
     }
 
-    static destroy() {
-        log("TODO")
-    }
-
 }
 
 class ShowBlogListButton{
@@ -206,7 +202,7 @@ class ShowBlogListButton{
         var y = toDesignY(event.clientY)
         if ((this.x < x && x < this.x + this.size * this.text.length)
             && (this.y - this.size < y && y < this.y)) {
-            window.location.href = "/list"
+            window.location.href = "blog/list"
             return true
         }
     }
@@ -418,7 +414,7 @@ class WelcomeUIAnimation {
 }
 
 function _main() {
-    welcome = WelcomeUI.create()
+    WelcomeUI.create() // invoke startUI() method when images loaded
 }
 
 _main()

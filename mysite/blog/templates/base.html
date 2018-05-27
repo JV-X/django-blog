@@ -1,18 +1,21 @@
 {% load static %}
 
-<div id="id-data" >{{owner}}</div>
+<!--将要用的数据统一使用 json 格式绑定到 id-data，避免乱用模板（如通过模板生产JavaScript代码等）-->
+<div id="id-data" >{{data}}</div>
 
 <canvas id="id-canvas"></canvas>
 
-<!-- set body's margin as 0 for get a full-screen canvas-->
+<!-- for get a real full-screen canvas-->
 <style type="text/css">
 body {
     margin:0;
     padding:0;
 }
+
 #id-data {
     display: none;
 }
+
 #id-canvas {
     width: 100%;
     height: 100%;

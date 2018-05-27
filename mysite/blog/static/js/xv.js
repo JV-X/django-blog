@@ -12,7 +12,7 @@ class XvFrameWork {
         this.registeredEvents = {}
         this.eventsBuffer = {}
 
-        this.data = element('#id-data').innerHTML
+        this.data = JSON.parse(element('#id-data').innerHTML)
     }
 
     static instance() {
@@ -107,13 +107,6 @@ function toActualY(y) {
 }
 
 function toDesignX(x) {
-//    log(document.body.scrollTop)
-//    log(document.body.scrollTop)
-//    log(document.body.scrollTop)
-//    log(document.body.scrollLeft)
-//    log(window.screenTop)
-//    log(window.screenLeft)
-
     x = XvAdaptScreen.instance().toDesignX(x)
     return x
 }
