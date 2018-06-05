@@ -1,7 +1,34 @@
-{% extends "base.html" %}
 {% load static %}
 
+<div>
+
+    <select name="sort-selector">
+        <option value="default" selected>- sort by -</option>
+    </select>
+
+    <select name="layout-selector">
+        <option value="linear" selected>- linear layout -</option>
+        <option value="grid">- grid layout - TODO</option>
+    </select>
+
+    <div style="display: inline;">
+
+        <select name="filter-selector">
+        <option value="default" selected>- filter by -</option>
+    </select>
+
+        <input id="id-filter-input">
+
+        <button id="id-filter-button">filter</button>
+
+    </div>
+
+</div>
+
+<div id="id-blog-container" style="background-color: coral;">
+
+</div>
 
 {% block script %}
-<script type="text/javascript" src="{% static "js/blog_list.js" %}"></script>
+<script type="text/javascript" src="{% static "js/lib.js" %}"></script>
 {% endblock %}
