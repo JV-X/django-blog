@@ -10,6 +10,7 @@ class Article(Base):
     content = models.TextField()
     title = models.TextField()
     authority = models.IntegerField(choices=Authority.STATUS_CHOICES)
+    tag = models.TextField()
 
     class Meta:
         db_table = 'Article'

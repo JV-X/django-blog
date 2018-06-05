@@ -1,31 +1,65 @@
 {% load static %}
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Jianwei-x | blog</title>
+
+    <link rel="stylesheet" href="{% static "css/blog_list.css" %}">
+
+</head>
 
 <div>
 
-    <select name="sort-selector">
-        <option value="default" selected>- sort by -</option>
-    </select>
-
-    <select name="layout-selector">
+    <select class="class-vertical-top" name="layout-selector">
         <option value="linear" selected>- linear layout -</option>
         <option value="grid">- grid layout - TODO</option>
     </select>
 
-    <div style="display: inline;">
+    <div id="id-sort-selector" class="class-inline-block class-vertical-top">
 
-        <select name="filter-selector">
-        <option value="default" selected>- filter by -</option>
-    </select>
+        <ul class="class-select">
 
-        <input id="id-filter-input">
+            <li>
+                <select name="class-sort-selector">
+                    <option value="default" selected>- sort by -</option>
+                </select>
+            </li>
 
-        <button id="id-filter-button">filter</button>
+        </ul>
 
     </div>
 
+    <div class="class-inline-block class-vertical-top">
+        <ul class="class-select">
+            <li>
+                <select name="filter-selector">
+                    <option value="default" selected>- filter by -</option>
+                </select>
+
+                <input class="class-filter-input">
+
+                <button class="class-filter-add">add</button>
+            </li>
+
+            <li>
+                <select name="filter-selector">
+                    <option value="default" selected>- filter by -</option>
+                </select>
+
+                <input class="id-filter-input">
+
+                <button class="id-filter-add">add</button>
+            </li>
+        </ul>
+
+    </div>
+
+    <button id="id-button-done">Done</button>
+
 </div>
 
-<div id="id-blog-container" style="background-color: coral;">
+<div id="id-blog-container">
 
     <div id="id-blog-linear-layout"></div>
 
@@ -35,4 +69,5 @@
 
 {% block script %}
 <script type="text/javascript" src="{% static "js/lib.js" %}"></script>
+<script type="text/javascript" src="{% static "js/blog_list_v2.js" %}"></script>
 {% endblock %}

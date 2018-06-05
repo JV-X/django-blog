@@ -23,5 +23,7 @@ function timeString(timestamp) {
 }
 
 function log(msg) {
-    console.log(msg)
+    console.log.bind(msg)
 }
+
+function findParentBySe
