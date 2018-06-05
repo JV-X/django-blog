@@ -16,9 +16,5 @@ def index(request):
 
 
 def blog_list(request):
-    data = json.dumps({
-        "all_blog": BlogListManager().list_all(),
-        "other": "test value",
-    })
 
-    return TemplateResponse(request, "blog_list.html", {"data": data})
+    return TemplateResponse(request, "blog_list.html")
