@@ -7,6 +7,6 @@ urlpatterns = [
     path('blog/list', views.blog_list, name='blog.list'),
 
     # api
-    path("api/articles", api.articles),
-    path("api/articles/config", api.articles_config),
+    path("blog/api/articles", api.articles),
+    path("blog/api/articles/config", api.articles_config),
 ]

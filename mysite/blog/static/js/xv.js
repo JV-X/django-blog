@@ -82,16 +82,12 @@ class XvAdaptScreen {
     }
 
     toDesignX(x) {
-        log("toDesignX 0 "+x)
         x = x / document.body.clientWidth * this.designWidth
-        log("toDesignX 1 "+x)
         return x
     }
 
     toDesignY(y) {
-        log("toDesignY 0 "+y)
         y = y / document.body.clientHeight * this.designHeight
-        log("toDesignY 1 "+y)
         return y
     }
 }

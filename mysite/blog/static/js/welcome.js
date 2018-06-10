@@ -379,7 +379,6 @@ class WelcomeUIAnimation {
         }
 
         if (img.y + offsetY > args["textY"]) {
-            log("invokle")
             img.y = args["textY"]
         }
 
@@ -402,7 +401,6 @@ class WelcomeUIAnimation {
         }
 
         if (img.y + offsetY < args["textY"]) {
-            log("invokle")
             img.y = args["textY"]
         }
 

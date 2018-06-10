@@ -1,6 +1,5 @@
 function ajax(method, path, data, callback) {
     var r = new XMLHttpRequest()
-
     r.open(method, path, true)
     r.setRequestHeader('Content-Type', 'application/json')
     r.onreadystatechange = function() {
@@ -23,7 +22,9 @@ function timeString(timestamp) {
 }
 
 function log(msg) {
-    console.log.bind(msg)
+    console.log(msg)
 }
 
-function findParentBySe
+function parentBySel(e, sel) {
+    return e.closest(sel)
+}

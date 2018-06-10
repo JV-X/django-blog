@@ -31,6 +31,22 @@ class ArticleFilter:
         }
 
 
+class ArticleSort:
+    CREATED_TIME = "time"
+    CREATED_TIME_REVERSE = "time_reverse"
+    UPDATED_TIME = "updated_time"
+    UPDATED_TIME_REVERSE = "title"
+
+    @classmethod
+    def dict(cls):
+        return {
+            cls.CREATED_TIME: 0,
+            cls.CREATED_TIME_REVERSE: 1,
+            cls.UPDATED_TIME: 2,
+            cls.UPDATED_TIME_REVERSE: 3,
+        }
+
+
 class UserManager(Singleton):
     def __init__(self):
         self.table = Article.objects
@@ -104,14 +120,5 @@ class ArticleManager(Singleton):
 
     def query(self, **_filter):
         _filter['deleted'] = False
-
-        r = self.table.fetch(**_filter)
+        r = self.table.filter(**_filter)
         return r
-
-    @classmethod
-    def sort_way(cls):
-        s = {
-            "time": 0,
-            "time_reverse": 1,
-        }
-        return s
